@@ -15,7 +15,8 @@ defmodule RealtimeGeofence.Application do
         id: :collection_registry
       ),
       Supervisor.child_spec({GeofenceSupervisor, []}, id: GeofenceSupervisor),
-      Supervisor.child_spec({CollectionSupervisor, []}, id: CollectionSupervisor)
+      Supervisor.child_spec({CollectionSupervisor, []}, id: CollectionSupervisor),
+      {Plug.Cowboy, scheme: :http, plug: App.Router, options: [port: 3000]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

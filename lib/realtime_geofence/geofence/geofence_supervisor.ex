@@ -9,6 +9,8 @@ defmodule GeofenceSupervisor do
     DynamicSupervisor.init(strategy: :one_for_one)
   end
 
+  @spec create_geofence(any(), any(), any(), any()) ::
+          :ignore | {:error, any()} | {:ok, pid()} | {:ok, pid(), any()}
   def create_geofence(id, type, value, webhook) do
     DynamicSupervisor.start_child(__MODULE__, {Geofence, {id, type, value, webhook}})
   end
